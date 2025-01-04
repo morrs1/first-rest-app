@@ -11,11 +11,35 @@ public class ScannersData {
     @Id
     private UUID id;
 
-    @ManyToOne()
-    @JoinColumn(name = "sensor_name", referencedColumnName = "name")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sensor_id", referencedColumnName = "id")
     private Scanner scanner;
 
     private double value;
 
     private boolean raining;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public boolean isRaining() {
+        return raining;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public void setRaining(boolean raining) {
+        this.raining = raining;
+    }
 }
