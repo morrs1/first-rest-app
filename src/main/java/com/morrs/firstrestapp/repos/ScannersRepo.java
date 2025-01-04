@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface ScannersRepo extends JpaRepository<Scanner, UUID> {
+
+    boolean existsByName(String name);
 }
