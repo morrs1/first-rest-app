@@ -1,32 +1,54 @@
 package com.morrs.firstrestapp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "scanners")
 public class Scanner {
+
     @Id
+    private UUID id = UUID.randomUUID();
+
     private String name;
 
-    @OneToMany(mappedBy = "scanner")
+
+    @OneToMany(mappedBy = "scanner", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<ScannersData> data;
 
     @Override
     public String toString() {
         return "Scanner{" +
                 "name='" + name + '\'' +
+                "id='" + id + '\'' +
                 '}';
     }
 
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public List<ScannersData> getData() {
+        return data;
+    }
+
+    public void setData(List<ScannersData> data) {
+        this.data = data;
     }
 }
