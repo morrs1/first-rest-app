@@ -19,7 +19,12 @@ public class ScannerService {
     }
 
     public List<Scanner> realAll() {
-        System.out.println(scannersRepo.findAll());
         return scannersRepo.findAll();
+    }
+
+    @Transactional()
+    public Scanner create(Scanner scanner) {
+        System.out.println(scanner);
+        return scannersRepo.save(scanner);
     }
 }
