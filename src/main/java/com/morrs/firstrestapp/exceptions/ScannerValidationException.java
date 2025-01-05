@@ -1,7 +1,7 @@
 package com.morrs.firstrestapp.exceptions;
 
-public class ScannerDuplicateNameException extends RuntimeException {
-    public ScannerDuplicateNameException(String message) {
+public class ScannerValidationException extends RuntimeException {
+    public ScannerValidationException(String message) {
         super(message);
     }
 
