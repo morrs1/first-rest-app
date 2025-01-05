@@ -1,7 +1,7 @@
 package com.morrs.firstrestapp.controllers;
 
 import com.morrs.firstrestapp.dto.ScannerDTO;
-import com.morrs.firstrestapp.exceptions.ScannerDuplicateNameException;
+import com.morrs.firstrestapp.exceptions.ScannerValidationException;
 import com.morrs.firstrestapp.mappers.ScannerMapper;
 import com.morrs.firstrestapp.models.Scanner;
 import com.morrs.firstrestapp.services.ScannerService;
@@ -9,12 +9,14 @@ import com.morrs.firstrestapp.utils.ErrorResponse;
 import com.morrs.firstrestapp.validators.ScannerValidator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/scanners")
@@ -41,13 +43,17 @@ public class ScannerController {
         Scanner scanner = scannerMapper.scannerDTOToScanner(scannerDTO);
         scannerValidator.validate(scanner, bindingResult);
         if (bindingResult.hasErrors()) {
-            throw new ScannerDuplicateNameException("Scanner with the same name already exists.");
+            throw new ScannerValidationException(
+                    bindingResult.getAllErrors().stream().map(
+                            DefaultMessageSourceResolvable::getDefaultMessage
+                    ).collect(Collectors.joining())
+            );
         }
         return scannerMapper.scannerToScannerDTO(scannerService.create(scanner));
     }
 
-    @ExceptionHandler(ScannerDuplicateNameException.class)
-    private ResponseEntity<ErrorResponse> handleException(ScannerDuplicateNameException ex){
+    @ExceptionHandler(ScannerValidationException.class)
+    private ResponseEntity<ErrorResponse> handleException(ScannerValidationException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessage()));
     }
 
