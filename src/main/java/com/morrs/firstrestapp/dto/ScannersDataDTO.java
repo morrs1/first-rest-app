@@ -10,10 +10,10 @@ public record ScannersDataDTO(
         @NotNull(message = "Value must ne not empty")
         int value,
 
-        @NotNull(message = "Value must ne not empty")
+        @NotNull(message = "Raining must ne not empty")
         boolean raining,
 
-        @NotNull(message = "Value must ne not empty")
+        @NotNull(message = "Scanner must ne not empty")
         ScannerDTO scannerDTO
 ) {
 }
