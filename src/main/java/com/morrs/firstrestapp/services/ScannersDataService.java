@@ -23,5 +23,13 @@ public class ScannersDataService {
         return scannersDataRepo.findAll();
     }
 
+    @Transactional
+    public ScannersData create(ScannersData scannersData) {
+        return scannersDataRepo.save(scannersData);
+    }
+
+    public int getRainyDaysCount(){
+        return scannersDataRepo.countRaining();
+    }
 
 }
