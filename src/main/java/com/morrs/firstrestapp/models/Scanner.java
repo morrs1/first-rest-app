@@ -2,6 +2,7 @@ package com.morrs.firstrestapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.ToString;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class Scanner {
 
     @OneToMany(mappedBy = "scanner", fetch = FetchType.EAGER)
     @JsonIgnore
+    @ToString.Exclude
     private List<ScannersData> data;
 
     @Override
