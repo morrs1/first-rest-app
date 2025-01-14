@@ -27,4 +27,8 @@ public class ScannerService {
         System.out.println(scanner);
         return scannersRepo.save(scanner);
     }
+
+    public Scanner readByName(String name) {
+        return scannersRepo.findByName(name);
+    }
 }
