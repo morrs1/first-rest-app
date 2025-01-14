@@ -11,5 +11,6 @@ public interface ScannersDataMapper {
     @Mapping(source = "scanner", target = "scannerDTO")
     ScannersDataDTO scannersDataToScannersDataDTO(ScannersData scannersData);
 
+    @Mapping(source = "scannerDTO", target = "scanner")
     ScannersData scannersDataDTOToScannersData(ScannersDataDTO scannersDataDTO);
 }
