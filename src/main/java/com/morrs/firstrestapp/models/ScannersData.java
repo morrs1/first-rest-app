@@ -42,4 +42,22 @@ public class ScannersData {
     public void setRaining(boolean raining) {
         this.raining = raining;
     }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    @Override
+    public String toString() {
+        return "ScannersData{" +
+                "id=" + id +
+                ", scanner=" + scanner +
+                ", value=" + value +
+                ", raining=" + raining +
+                '}';
+    }
 }
