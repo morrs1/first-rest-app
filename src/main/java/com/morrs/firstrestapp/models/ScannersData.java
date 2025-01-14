@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ScannersData {
 
     @Id
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sensor_id", referencedColumnName = "id")
